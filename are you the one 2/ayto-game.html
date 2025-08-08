@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are You The One? - Das Spiel</title>
+    <link rel="stylesheet" href="ayto-game.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen">
+            <h1 class="glow">Are You The One?</h1>
+            <div class="intro-text">
+                <p>10 Männer und 10 Frauen müssen ihre perfekten Matches finden!</p>
+                <p>Du hast 10 Wochen Zeit, um alle 10 Perfect Matches zu finden.</p>
+                <p>Gelingt es dir, gewinnst du 1 Million Dollar!</p>
+            </div>
+            
+            <!-- Teilnehmeranzahl-Auswahl -->
+            <div class="participant-count-selection">
+                <h3>Teilnehmeranzahl festlegen</h3>
+                <div class="count-selection">
+                    <label for="participant-count">Anzahl Paare:</label>
+                    <select id="participant-count" class="count-select">
+                        <option value="4">4 Paare (8 Teilnehmer)</option>
+                        <option value="5">5 Paare (10 Teilnehmer)</option>
+                        <option value="6">6 Paare (12 Teilnehmer)</option>
+                        <option value="7">7 Paare (14 Teilnehmer)</option>
+                        <option value="8">8 Paare (16 Teilnehmer)</option>
+                        <option value="9">9 Paare (18 Teilnehmer)</option>
+                        <option value="10" selected>10 Paare (20 Teilnehmer)</option>
+                    </select>
+                    <button id="apply-count-btn" class="action-button">Anzahl anwenden</button>
+                </div>
+            </div>
+            
+            <!-- Teilnehmer-Verwaltung -->
+            <div class="participants-management">
+                <h3>Teilnehmer verwalten</h3>
+                <div class="participants-grid">
+                    <div class="males-section">
+                        <h4 id="males-title">Männer (10)</h4>
+                        <div id="males-management" class="participants-management-container"></div>
+                        <button id="add-male-btn" class="action-button">+ Männlichen Teilnehmer hinzufügen</button>
+                    </div>
+                    <div class="females-section">
+                        <h4 id="females-title">Frauen (10)</h4>
+                        <div id="females-management" class="participants-management-container"></div>
+                        <button id="add-female-btn" class="action-button">+ Weiblichen Teilnehmer hinzufügen</button>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="start-game-btn" class="glow-button">Spiel starten</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen" style="display: none;">
+            <div class="game-header">
+                <h2>Woche <span id="week-number">1</span> von 10</h2>
+                <div class="money-info">
+                    <span id="money-amount">$1,000,000</span>
+                </div>
+            </div>
+
+            <!-- Participants Section -->
+            <div class="participants-section">
+                <h3>Teilnehmer</h3>
+                <div class="participants-grid">
+                    <div class="males-section">
+                        <h4>Männer</h4>
+                        <div id="males-container" class="participants-container"></div>
+                    </div>
+                    <div class="females-section">
+                        <h4>Frauen</h4>
+                        <div id="females-container" class="participants-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Pairs Section -->
+            <div class="pairs-section">
+                <h3>Aktuelle Paare</h3>
+                <div id="current-pairs" class="pairs-container"></div>
+            </div>
+
+            <!-- Game Controls -->
+            <div class="game-controls">
+                <button id="match-ceremony-btn" class="action-button">Match-Up Ceremony</button>
+                <button id="truth-booth-btn" class="action-button">Truth Booth</button>
+                <button id="reset-pairs-btn" class="action-button">Nächste Runde starten</button>
+                <button id="solution-btn" class="action-button">Auflösung</button>
+            </div>
+
+            <!-- Match Ceremony Modal -->
+            <div id="match-ceremony-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <h3>Match-Up Ceremony</h3>
+                    <div id="ceremony-pairs"></div>
+                    <div class="spotlights-container">
+                        <div class="spotlight" data-index="0"></div>
+                        <div class="spotlight" data-index="1"></div>
+                        <div class="spotlight" data-index="2"></div>
+                        <div class="spotlight" data-index="3"></div>
+                        <div class="spotlight" data-index="4"></div>
+                        <div class="spotlight" data-index="5"></div>
+                        <div class="spotlight" data-index="6"></div>
+                        <div class="spotlight" data-index="7"></div>
+                        <div class="spotlight" data-index="8"></div>
+                        <div class="spotlight" data-index="9"></div>
+                    </div>
+                    <div id="ceremony-result"></div>
+                    <button id="close-ceremony-btn" class="action-button">Schließen</button>
+                </div>
+            </div>
+
+            <!-- Truth Booth Modal -->
+            <div id="truth-booth-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <h3>Truth Booth</h3>
+                    <p>Das ausgewählte Paar wird überprüft:</p>
+                    <div id="truth-booth-pairs"></div>
+                    <div id="truth-booth-result"></div>
+                    <button id="close-truth-booth-btn" class="action-button">Schließen</button>
+                </div>
+            </div>
+
+            <!-- Password Modal -->
+            <div id="password-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <h3>Passwort erforderlich</h3>
+                    <p>Gib das Passwort ein, um die Auflösung zu sehen:</p>
+                    <input type="password" id="password-input" placeholder="Passwort eingeben" class="password-input">
+                    <div class="password-buttons">
+                        <button id="submit-password-btn" class="action-button">Bestätigen</button>
+                        <button id="cancel-password-btn" class="action-button">Abbrechen</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Solution Modal -->
+            <div id="solution-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <h3>🎯 PERFEKTE MATCHES 🎯</h3>
+                    <div id="solution-pairs" class="pairs-container"></div>
+                    <button id="close-solution-btn" class="action-button">Schließen</button>
+                </div>
+            </div>
+
+            <!-- Game Over Modal -->
+            <div id="game-over-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <h3 id="game-over-title"></h3>
+                    <div id="game-over-content"></div>
+                    <button id="new-game-btn" class="action-button">Neues Spiel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="ayto-game.js"></script>
+</body>
+</html> 

@@ -1,0 +1,745 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#game-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Screen Styles */
+.screen {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+/* Start Screen */
+#start-screen h1 {
+    font-size: 3.5rem;
+    margin-bottom: 30px;
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+}
+
+.intro-text {
+    margin: 30px 0;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.intro-text p {
+    margin: 15px 0;
+    color: #e0e0e0;
+}
+
+/* Participant Count Selection */
+.participant-count-selection {
+    margin: 30px 0;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.participant-count-selection h3 {
+    color: #ff69b4;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+}
+
+.count-selection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.count-selection label {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.count-select {
+    padding: 10px 15px;
+    border: 2px solid #ff69b4;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.count-select:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+}
+
+.count-select option {
+    background: #1a1a2e;
+    color: white;
+}
+
+/* Participants Management */
+.participants-management {
+    margin: 40px 0;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.participants-management h3 {
+    color: #ff69b4;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.participants-management .participants-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.participants-management .males-section,
+.participants-management .females-section {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.participants-management h4 {
+    color: #ff69b4;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.participants-management-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+    min-height: 200px;
+}
+
+.participant-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.participant-card.male {
+    border-color: #4a90e2;
+}
+
+.participant-card.female {
+    border-color: #ff69b4;
+}
+
+.participant-card img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.participant-card .name {
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.participant-card .controls {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.participant-card .controls button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.participant-card .controls button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.participant-card .controls .upload-btn {
+    color: #ffc107;
+}
+
+.participant-card .controls .delete-btn {
+    color: #ff4444;
+}
+
+.participant-card input[type="file"] {
+    display: none;
+}
+
+/* Buttons */
+.glow-button, .action-button {
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+    margin: 10px;
+}
+
+.glow-button:hover, .action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
+}
+
+.action-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+}
+
+.action-button:disabled:hover {
+    transform: none;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+}
+
+/* Game Screen */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.game-header h2 {
+    color: #ff69b4;
+    font-size: 1.8rem;
+}
+
+.money-info {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00ff88;
+    text-shadow: 0 0 10px #00ff88;
+}
+
+/* Participants Section */
+.participants-section {
+    margin-bottom: 30px;
+}
+
+.participants-section h3 {
+    color: #ff69b4;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.participants-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.males-section, .females-section {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.males-section h4, .females-section h4 {
+    color: #ff69b4;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.participants-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+}
+
+.participant {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.participant:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+}
+
+.participant.selected {
+    border-color: #ffff00;
+    box-shadow: 0 0 20px #ffff00;
+    background: rgba(255, 255, 0, 0.1);
+}
+
+.participant.male {
+    border-color: #4a90e2;
+}
+
+.participant.female {
+    border-color: #ff69b4;
+}
+
+.participant.disabled {
+    opacity: 0.4;
+    filter: grayscale(100%);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.participant.disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.participant img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 8px;
+}
+
+.participant .name {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Pairs Section */
+.pairs-section {
+    margin-bottom: 30px;
+}
+
+.pairs-section h3 {
+    color: #ff69b4;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.pairs-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.pair {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 2px solid #ff69b4;
+    transition: all 0.3s ease;
+}
+
+.pair:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 105, 180, 0.4);
+}
+
+.pair-images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.pair-images img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.pair-images .heart {
+    font-size: 1.5rem;
+    color: #ff69b4;
+}
+
+.pair-names {
+    font-weight: bold;
+    color: #e0e0e0;
+}
+
+.pair {
+    position: relative;
+}
+
+.pair .remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 25px;
+    height: 25px;
+    background: rgba(255, 68, 68, 0.8);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.pair .remove-btn:hover {
+    background: rgba(255, 68, 68, 1);
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+}
+
+.pair.selected {
+    border-color: #ffff00;
+    box-shadow: 0 0 20px #ffff00;
+    background: rgba(255, 255, 0, 0.1);
+}
+
+/* Game Controls */
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    border: 2px solid #ff69b4;
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+}
+
+.modal-content h3 {
+    color: #ff69b4;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+/* Ceremony Result */
+#ceremony-result {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#ceremony-result.perfect {
+    background: rgba(0, 255, 136, 0.2);
+    color: #00ff88;
+    border: 2px solid #00ff88;
+}
+
+#ceremony-result.partial {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    border: 2px solid #ffc107;
+}
+
+#ceremony-result.none {
+    background: rgba(255, 68, 68, 0.2);
+    color: #ff4444;
+    border: 2px solid #ff4444;
+}
+
+/* Spotlights Styling */
+.spotlights-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.spotlight {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #333;
+    border: 2px solid #666;
+    transition: all 0.5s ease;
+    position: relative;
+}
+
+.spotlight::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #555;
+    transition: all 0.5s ease;
+}
+
+.spotlight.on {
+    background: #ffff00;
+    border-color: #ffff00;
+    box-shadow: 0 0 20px #ffff00, 0 0 40px #ffff00;
+    animation: spotlightOn 0.5s ease;
+}
+
+.spotlight.on::before {
+    background: #ffff00;
+    box-shadow: 0 0 10px #ffff00;
+}
+
+@keyframes spotlightOn {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 #ffff00;
+    }
+    50% {
+        transform: scale(1.2);
+        box-shadow: 0 0 30px #ffff00, 0 0 60px #ffff00;
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px #ffff00, 0 0 40px #ffff00;
+    }
+}
+
+/* Truth Booth Result */
+#truth-booth-result {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+#truth-booth-result.perfect {
+    background: rgba(0, 255, 136, 0.2);
+    color: #00ff88;
+    border: 2px solid #00ff88;
+}
+
+#truth-booth-result.not-perfect {
+    background: rgba(255, 68, 68, 0.2);
+    color: #ff4444;
+    border: 2px solid #ff4444;
+}
+
+/* Processing Indicator */
+#truth-booth-result.processing {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+    border: 2px solid #ffc107;
+}
+
+.processing-indicator {
+    font-size: 1.5rem;
+    text-align: center;
+    animation: processingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes processingPulse {
+    0%, 100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+/* Truth Booth Pulsing Symbols */
+.pulse-heart {
+    font-size: 4rem;
+    text-align: center;
+    animation: pulseHeart 1s ease-in-out;
+}
+
+.pulse-x {
+    font-size: 6rem;
+    text-align: center;
+    animation: pulseX 1s ease-in-out;
+}
+
+.perfect-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #00ff88;
+    text-shadow: 0 0 10px #00ff88;
+}
+
+@keyframes pulseHeart {
+    0% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulseX {
+    0% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Password Input Styling */
+.password-input {
+    width: 100%;
+    padding: 15px;
+    margin: 20px 0;
+    border: 2px solid #ff69b4;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.password-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.password-input:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+}
+
+.password-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Solution Modal Styling */
+#solution-pairs {
+    margin: 20px 0;
+}
+
+#solution-pairs .pair {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: #00ff88;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+#solution-pairs .pair:hover {
+    box-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .participants-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .game-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .game-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .pairs-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animations */
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 105, 180, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(255, 105, 180, 0.6); }
+}
+
+.glow {
+    animation: glow 2s ease-in-out infinite;
+} 

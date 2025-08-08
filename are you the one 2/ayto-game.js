@@ -11,28 +11,28 @@ class AYTOGame {
         
         this.participants = [
             // Männer
-            { id: 1, name: "Alex", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=A" },
-            { id: 2, name: "Ben", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=B" },
-            { id: 3, name: "Chris", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=C" },
-            { id: 4, name: "David", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=D" },
-            { id: 5, name: "Ethan", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=E" },
-            { id: 6, name: "Frank", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=F" },
-            { id: 7, name: "George", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=G" },
-            { id: 8, name: "Henry", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=H" },
-            { id: 9, name: "Ian", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=I" },
-            { id: 10, name: "Jack", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=J" },
+            { id: 1, name: "Michael", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=M" },
+            { id: 2, name: "Arne", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=A" },
+            { id: 3, name: "John", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=J" },
+            { id: 4, name: "Kai", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=K" },
+            { id: 5, name: "Mathäi", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=M" },
+            { id: 6, name: "ole", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=O" },
+            { id: 7, name: "Sören", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=S" },
+            { id: 8, name: "Jannis", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=J" },
+            { id: 9, name: "Timon", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=T" },
+            { id: 10, name: "Max", gender: "male", image: "https://via.placeholder.com/60x60/4a90e2/ffffff?text=M" },
             
             // Frauen
-            { id: 11, name: "Anna", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=A" },
-            { id: 12, name: "Bella", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=B" },
-            { id: 13, name: "Clara", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=C" },
-            { id: 14, name: "Diana", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=D" },
-            { id: 15, name: "Emma", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=E" },
-            { id: 16, name: "Fiona", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=F" },
-            { id: 17, name: "Grace", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=G" },
-            { id: 18, name: "Hannah", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=H" },
-            { id: 19, name: "Iris", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=I" },
-            { id: 20, name: "Julia", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=J" }
+            { id: 11, name: "Lisa B", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=L" },
+            { id: 12, name: "Sina", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=S" },
+            { id: 13, name: "Rebecca", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=R" },
+            { id: 14, name: "Laura", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=L" },
+            { id: 15, name: "Tim", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=T" },
+            { id: 16, name: "Lisa R", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=L" },
+            { id: 17, name: "Kimi", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=K" },
+            { id: 18, name: "Svenja", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=S" },
+            { id: 19, name: "mona", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=M" },
+            { id: 20, name: "Kathy", gender: "female", image: "https://via.placeholder.com/60x60/ff69b4/ffffff?text=K" }
         ];
         
         this.init();

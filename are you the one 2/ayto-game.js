@@ -323,14 +323,27 @@ class AYTOGame {
         const truthBoothBtn = document.getElementById('truth-booth-btn');
         const selectedPair = document.querySelector('.pair.selected');
         
+        if (this.truthBoothUsed) {
+            truthBoothBtn.disabled = true;
+            truthBoothBtn.style.opacity = '0.5';
+            truthBoothBtn.style.cursor = 'not-allowed';
+            truthBoothBtn.title = 'Truth Booth wurde diese Woche bereits verwendet';
+            truthBoothBtn.textContent = 'Truth Booth (gesperrt)';
+            return;
+        }
+        
         if (selectedPair && this.currentPairs.length > 0) {
             truthBoothBtn.disabled = false;
             truthBoothBtn.style.opacity = '1';
             truthBoothBtn.style.cursor = 'pointer';
+            truthBoothBtn.title = '';
+            truthBoothBtn.textContent = 'Truth Booth';
         } else {
             truthBoothBtn.disabled = true;
             truthBoothBtn.style.opacity = '0.5';
             truthBoothBtn.style.cursor = 'not-allowed';
+            truthBoothBtn.title = '';
+            truthBoothBtn.textContent = 'Truth Booth';
         }
     }
     
@@ -353,6 +366,9 @@ class AYTOGame {
             this.showGameOver(false);
             return;
         }
+        
+        // Truth Booth für die neue Woche freigeben
+        this.truthBoothUsed = false;
         
         // Paare zurücksetzen
         this.currentPairs = [];
@@ -379,14 +395,21 @@ class AYTOGame {
         const modal = document.getElementById('match-ceremony-modal');
         const pairsContainer = document.getElementById('ceremony-pairs');
         const resultContainer = document.getElementById('ceremony-result');
+        const spotlightsWrap = document.querySelector('.spotlights-container');
         
         // Paare nicht mehr anzeigen
         pairsContainer.innerHTML = '';
         
-        // Alle Scheinwerfer zurücksetzen
-        document.querySelectorAll('.spotlight').forEach(spotlight => {
-            spotlight.classList.remove('on');
-        });
+        // Scheinwerfer dynamisch gemäß targetPairCount aufbauen
+        if (spotlightsWrap) {
+            spotlightsWrap.innerHTML = '';
+            for (let i = 0; i < this.targetPairCount; i++) {
+                const s = document.createElement('div');
+                s.className = 'spotlight';
+                s.dataset.index = String(i);
+                spotlightsWrap.appendChild(s);
+            }
+        }
         
         // Ergebnis berechnen
         const perfectMatches = this.countPerfectMatches();
@@ -438,6 +461,12 @@ class AYTOGame {
             return;
         }
         
+        // Pro Woche nur einmal erlaubt
+        if (this.truthBoothUsed) {
+            alert('Die Truth Booth wurde diese Woche bereits verwendet. Warte bis zur nächsten Runde.');
+            return;
+        }
+        
         // Prüfen ob ein Paar ausgewählt ist
         const selectedPairElement = document.querySelector('.pair.selected');
         if (!selectedPairElement) {
@@ -469,6 +498,10 @@ class AYTOGame {
         // Loading-Indikator anzeigen
         resultContainer.innerHTML = '<div class="processing-indicator">🔍 Analysiere Paar...</div>';
         resultContainer.className = 'processing';
+        
+        // Truth Booth als genutzt markieren und Button-Status aktualisieren
+        this.truthBoothUsed = true;
+        this.updateTruthBoothButton();
         
         // Verzögerte Auflösung
         setTimeout(() => {
@@ -763,4 +796,4 @@ class AYTOGame {
 // Spiel starten
 document.addEventListener('DOMContentLoaded', () => {
     window.game = new AYTOGame();
-}); 
+});
